@@ -26,11 +26,11 @@ from drf_yasg       import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="dhsproject",
+        title="건강주의보 healthwarning (bbiproject)",
         default_version='1.0',
-        description="dhsproject backend api 문서",
+        description="건강주의보 backend api 문서",
         terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="dahaessyu8@gmail.com"), # 부가정보
+        contact=openapi.Contact(email="healthwarning01@gmail.com"), # 부가정보
         license=openapi.License(name="backend"),     # 부가정보
     ),
     public=True,

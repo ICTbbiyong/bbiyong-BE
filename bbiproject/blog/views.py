@@ -59,9 +59,9 @@ class PostCreateView(generics.CreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def send_achievement_email(self, user, post):
-        subject = f"(건강주의보) 삐용삐용! {user.username}님의 달성률이 100% 미만입니다."
+        subject = f"[건강주의보] 삐용삐용! {user.username}님의 달성률이 100% 미만입니다."
         message = (
-            f"{user.username}님의 {post.date.strftime('%Y-%m-%d')}일자 달성률이 100%를 만족하지 못했습니다.\n\n"
+            f"{user.username}님의 {post.date.strftime('%Y-%m-%d')}일자 달성률이 100%를 만족하지 못했습니다.\n"
             "보호자님의 확인을 부탁드립니다 :)\n\n"
             "from 건강주의보"
         )
@@ -270,7 +270,7 @@ class MissEmailNotificationView(APIView):
         user_name = user_profile.username  
 
 
-        email_subject = '(건강주의보) 보고싶어 알림이 도착했습니다!'
+        email_subject = '[건강주의보] 보고싶어 알림이 도착했습니다!'
         email_message = f'{user_name}님께서 보호자님의 연락을 기다리고 있습니다.\n빠른 연락을 부탁드립니다 :)\n\nfrom 건강주의보'
         from_email = settings.DEFAULT_FROM_EMAIL
         recipient_list = [user_profile.email]

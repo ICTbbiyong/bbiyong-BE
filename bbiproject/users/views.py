@@ -140,13 +140,28 @@ class ProfileUpdateAPIView(APIView):
             serializer.save()
             return Response({"message": "User updated successfully", "data": serializer.data})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-
+   
 
 
 
 
 # ID 중복검사 버튼
+@swagger_auto_schema(
+    method='post',
+    operation_description="아이디 중복검사 API 입니다.",
+    operation_summary="아이디 중복검사",
+    request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            'identifier': openapi.Schema(type=openapi.TYPE_STRING, description='중복 확인할 아이디')
+        },
+        required=['identifier']
+    ),
+    responses={
+        200: openapi.Response(description="사용 가능한 아이디입니다!", examples={"application/json": {"identifier": "사용 가능한 아이디입니다!"}}),
+        409: openapi.Response(description="이미 사용중인 아이디입니다!", examples={"application/json": {"identifier": "이미 사용중인 아이디입니다!"}})
+    }
+)
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def check_identifier(request):
@@ -158,7 +173,26 @@ def check_identifier(request):
     return Response({'identifier': '사용 가능한 아이디입니다!'}, status=status.HTTP_200_OK)
 
 
+
+
+
 # 이메일 중복검사 버튼
+@swagger_auto_schema(
+    method='post',
+    operation_description="이메일 중복검사 API 입니다.",
+    operation_summary="이메일 중복검사",
+    request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            'email': openapi.Schema(type=openapi.TYPE_STRING, description='중복 확인할 이메일')
+        },
+        required=['email']
+    ),
+    responses={
+        200: openapi.Response(description="사용 가능한 이메일입니다!", examples={"application/json": {"email": "사용 가능한 이메일입니다!"}}),
+        409: openapi.Response(description="이미 사용중인 이메일입니다!", examples={"application/json": {"email": "이미 사용중인 이메일입니다!"}})
+    }
+)
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def check_email(request):
